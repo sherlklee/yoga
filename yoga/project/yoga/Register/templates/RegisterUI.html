@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>注册</title>
+{% endblock %}
+
+{% block content %}
+<script>
+$().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+  $("#signupForm").validate({
+	    rules: {
+	      username: {
+	        required: true,
+	        minlength: 2
+	      },
+	      password: {
+	        required: true,
+	        minlength: 5
+	      },
+	      confirmPassword: {
+	        required: true,
+	        minlength: 5,
+	        equalTo: "#password"
+	      },
+	    },
+	    messages: {
+	      username: {
+	        required: "请输入用户名",
+	        minlength: "用户名必需由两个字母组成"
+	      },
+	      password: {
+	        required: "请输入密码",
+	        minlength: "密码长度不能小于 5 个字母"
+	      },
+	      confirmPassword: {
+	        required: "请输入密码",
+	        minlength: "密码长度不能小于 5 个字母",
+	        equalTo: "两次密码输入不一致"
+	      },
+	    }
+	});
+});
+</script>
+<style>
+.error{
+	color:red;
+}
+</style>
+{% endblock %}
+
+
+{% block content1 %}
+<div class="container">
+    <form  id="signupForm" method="post" action=""  style="position:fixed;top:250px;right:300px;">
+    {%csrf_token%}
+        <fieldset style="border:true;">
+             <legend >Join us:</legend>
+            {% for field in registerForm %}
+            <div class="fieldWrapper" >
+                <font color="black"> {{ field.label_tag }} {{ field }}</font>
+            </div>
+            {% endfor %}
+            {%if registerForm.non_field_errors%}
+            {{registerForm.non_field_errors}}
+            {%endif%}
+            <button type="submit" class="btn btn-primary">注册</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

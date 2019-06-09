@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+{% block title %}<title>首页</title>{% endblock %}
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+	 {% load staticfiles %}
+<link href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{%static 'css/font-awesome.min.css'%}" rel="stylesheet">
+<link href="{%static 'css/animate.min.css'%}" rel="stylesheet">
+<link href="{%static 'css/prettyPhoto.css'%}" rel="stylesheet">
+<link href="{%static 'css/styles.css'%}" rel="stylesheet">
+	 {% load staticfiles %}
+<link rel="shortcut icon" href="{%static 'images/ico/favicon.ico'%}">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block content %}
+{% endblock %}
+</head>
+
+<body id="home">
+<header id="header">
+	<nav id="main-nav" class="navbar navbar-default navbar-fixed-top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				 {% load staticfiles %}
+				<a class="navbar-brand" href="/"><img src="{% static 'images/logo.png'%}" alt="logo"></a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right">
+				<ul class="nav navbar-nav">
+					{% if userid == "trainer" %}
+					<li class="scroll active"><a href="/">主页</a></li>
+					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="#our-team">学员</a></li>
+					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio" >你好~{{username}}</a></li>
+					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
+					{% elif userid == "admin" %}
+					<li class="scroll active"><a href="/">主页</a></li>
+					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="#our-team">教练</a></li>
+					<li class="scroll"><a href="#about">教室</a></li>
+					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
+					{% elif userid == "customer" %}
+					<li class="scroll active"><a href="/">主页</a></li>
+					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="#our-team">教练</a></li>
+					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio">你好~{{username}}</a></li>
+					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
+					{% else %}
+					<li class="scroll active"><a href="/">主页</a></li>
+					<li class="scroll"><a href="#services">yoga</a></li>
+					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="#our-team">教练</a></li>
+					<li class="scroll"><a href="#portfolio">关于我们</a></li>
+					<li class="scroll" style="position:fixed;right:60px;"><a href="/login/">登录</a></li>
+					<li class="scroll"style="position:fixed;right:20px;"><a href="/register/">注册</a></li>
+					{%endif%}
+				</ul>
+			</div>
+		</div><!--/.container-->
+	</nav><!--/nav-->
+</header><!--/header-->
+
+
+<section id="hero-banner">
+    <div class="banner-inner">
+		{% block content1 %}
+           <div class="container">
+               <div class="row">
+                   <div class="col-sm-12">
+
+                           <h2>Better than <b>EVER</b></h2>
+                           <p>Physical Mental and Spiritual practices <br/></p>
+                           <a class="btn btn-primary btn-lg" href="#">Get more</a>
+
+                   </div>
+               </div>
+           </div>{% endblock %}
+
+       </div>
+</section><!--/#main-slider-->
+
+
+<footer id="footer">
+	<div class="container">
+		<p>Contact-us: 1814059211@qq.com</p>
+	</div>
+</footer><!--/#footer-->
+ {% load staticfiles %}
+<script src="{% static 'js/jquery.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/mousescroll.js'%}"></script>
+<script src="{% static 'js/smoothscroll.js'%}"></script>
+<script src="{% static 'js/jquery.prettyPhoto.js'%}"></script>
+<script src="{% static 'js/jquery.isotope.min.js'%}"></script>
+<script src="{% static 'js/jquery.inview.min.js'%}"></script>
+<script src="{% static 'js/wow.min.js'%}"></script>
+<script src="{% static 'js/custom-scripts.js'%}"></script>
+</body>
+</html>

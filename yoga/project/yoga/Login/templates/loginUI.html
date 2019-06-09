@@ -1,0 +1,30 @@
+{%extends 'base.html' %}
+
+{% block title %}
+    <title>yoga登录</title>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block content1 %}
+<div class="container">
+    <form method="post" action="" style="position:fixed;top:250px;right:300px;">
+        {%csrf_token%}
+        <fieldset style="border:true;">
+            <legend >Login:</legend>
+            {% for item in loginForm %}
+            <div class="input-group mb-6">
+               <font color="black">{{item}}</font>
+            </div>
+            {% endfor %}
+            {%if loginForm.non_field_errors%}
+                <div class="ErrorMessage">{{loginForm.non_field_errors}}</div>
+            {%endif%}
+            <button type="submit" class="btn btn-primary">登录</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

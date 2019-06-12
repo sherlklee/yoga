@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     'Sessionmanager',
     'CustomerInformation',
     'Index',
+    'TrainerInformation',
+    'Memberlist',
+    'Course',
+    'Purchasecourse',
+    'Classroom',
 ]
 
 MIDDLEWARE = [

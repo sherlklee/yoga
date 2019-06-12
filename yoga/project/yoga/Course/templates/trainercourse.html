@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的课程</title>
+</head>
+<body>
+<table border="3" align="center">
+        <caption>在售课程信息</caption>
+        <thead>
+        <tr>
+            <th>课程id</th>
+            <th>课程名</th>
+            <th>课程教练</th>
+            <th>价格</th>
+            <th>介绍</th>
+        </tr>
+        </thead>
+            {% for item in course_list%}
+        <div>
+            <tr>
+                <td>
+                        {{ item.courseid }}
+                </td>
+                <td>
+                        {{ item.coursename }}
+                </td>
+                <td>
+                        {{ item.trainer }}
+                </td>
+                <td>
+                    {{ item.courseprice }}
+                </td>
+                <td>
+                    {{ item.introduction }}
+                </td>
+            </tr>
+            </div>
+        {% endfor %}
+        </table>
+</body>
+</html>

@@ -17,3 +17,6 @@ def index(request):
     else:  # 如果是未登录状态，那么对应页面就应该显示登陆或者注册
         userid = "none"
     return render(request, 'base.html', {"userid": userid,"username":username} )  # 渲染页面
+
+def indextemp(request):
+    return render(request,"basemanager.html",locals())

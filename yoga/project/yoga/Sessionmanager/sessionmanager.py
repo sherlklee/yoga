@@ -38,10 +38,10 @@ class SessionManager:
             return False
 
     def Isadministrator(self):
-        username=self.session.get("Username",default=None)
+        username = self.session.get("Username", default=None)
         if username is not None:
-            user=Customer.objects.get(username=username)
-            return user.Isadministrator()
+            user = Customer.objects.get(username=username)
+            return user.Isadmin()
         return False
 
     def Getusername(self):

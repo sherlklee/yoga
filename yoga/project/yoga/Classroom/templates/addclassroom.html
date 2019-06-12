@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加教室</title>
+</head>
+<body>
+<p align="center"><a href="/classroom/classroomlist/">教室</a> | <a href="/classroom/addclassroom/">添加教室</a>
+    <br/>
+    <br/>
+    <div class="container">
+    <form method="post" action="" style="position:fixed;top:250px;right:300px;">
+        {%csrf_token%}
+        {{ classroom }}
+        <button type="submit" class="btn btn-primary">确认</button>
+    </form>
+</div>
+</body>
+</html>

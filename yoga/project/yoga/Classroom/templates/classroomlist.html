@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教室</title>
+</head>
+<body>
+ <p align="center">
+        <a href="/classroom/classroomlist/">教室</a> | <a href="/classroom/addclassroom/">添加教室</a>
+    </p>
+     <br/>
+     <br/>
+    <table border="3" align="center">
+        <caption>教室信息</caption>
+        <thead>
+        <tr>
+            <th>教室id</th>
+            <th>教室名</th>
+            <th>备注</th>
+            <th>容纳人数</th>
+        </tr>
+        </thead>
+            {% for item in classroom%}
+        <div>
+            <tr>
+                <td>
+                        {{ item.classroomid }}
+                </td>
+                <td>
+                        {{ item.classroomname }}
+                </td>
+                <td>
+                        {{ item.note }}
+                </td>
+                <td>
+                    {{ item.maxpersonnumber }}
+                </td>
+                <!--<td>-->
+                <!--<a href="/course/cancle/{{item.courseid}}"><button>下架课程</button></a>-->
+                <!--</td>-->
+            </tr>
+            </div>
+        {% endfor %}
+        </table></body>
+</html>

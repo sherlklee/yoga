@@ -43,21 +43,25 @@
 				<ul class="nav navbar-nav">
 					{% if userid == "trainer" %}
 					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="/course/trainercourse/">课程</a></li>
 					<li class="scroll"><a href="#our-team">学员</a></li>
-					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio" >你好~{{username}}</a></li>
+					<li class="scroll"style="position:fixed;right:60px;"><a href="/trainerinformation/" >你好~{{username}}</a></li>
 					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
 					{% elif userid == "admin" %}
 					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
-					<li class="scroll"><a href="#our-team">教练</a></li>
-					<li class="scroll"><a href="#about">教室</a></li>
+					<li class="scroll"><a href="/course/courselist/">课程</a></li>
+					<li class="scroll"><a href="/memberlist/trainer/">教练</a></li>
+					<li class="scroll"><a href="/purchasecourse/showrecordadmin/unpaid/">订单</a></li>
+					<li class="scroll"><a href="/classroom/classroomlist/">教室</a></li>
+					<li class="scroll"><a href="/memberlist/customer/">会员</a></li>
+					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio" >你好~管理员</a></li>
 					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
 					{% elif userid == "customer" %}
 					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
+					<li class="scroll"><a href="/purchasecourse/myrecord/unpaid/">我的订单</a></li>
+					<li class="scroll"><a href="/purchasecourse/">课程</a></li>
 					<li class="scroll"><a href="#our-team">教练</a></li>
-					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio">你好~{{username}}</a></li>
+					<li class="scroll"style="position:fixed;right:60px;"><a href="/customerinformation/">你好~{{username}}</a></li>
 					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
 					{% else %}
 					<li class="scroll active"><a href="/">主页</a></li>
@@ -74,7 +78,7 @@
 	</nav><!--/nav-->
 </header><!--/header-->
 
-
+{% block content2 %}
 <section id="hero-banner">
     <div class="banner-inner">
 		{% block content1 %}
@@ -92,7 +96,7 @@
 
        </div>
 </section><!--/#main-slider-->
-
+{% endblock %}
 
 <footer id="footer">
 	<div class="container">

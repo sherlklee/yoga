@@ -1,0 +1,43 @@
+[
+  {
+      "model": "Database.Customer",
+      "fields": {
+        "username": "admin",
+        "password": "123456",
+        "identity": "admin"
+      }
+  },
+  {
+      "model": "Database.Customer",
+        "fields": {
+          "username": "sherlk",
+          "password": "160400617",
+          "identity": "trainer"
+        }
+  },
+  {
+      "model": "Database.Trainerinformation",
+        "fields": {
+          "username": "sherlk"
+        }
+  },
+  {
+      "model": "Database.Customer",
+        "fields": {
+          "username": "customer",
+          "password": "160400617",
+          "identity": "customer"
+        }
+  },
+  {
+      "model": "Database.Course",
+        "fields": {
+          "courseid":"1",
+          "coursename":"yoga",
+          "trainer":"Mr.Lee",
+          "courseprice":"100",
+          "coursevalid":"True",
+          "introdution": "this is a good course"
+        }
+  }
+]

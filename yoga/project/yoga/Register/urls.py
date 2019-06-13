@@ -3,4 +3,6 @@ from .views import *
 
 urlpatterns = {
     path('', register),
+    path('trainer/', trainerregister),
+
 }

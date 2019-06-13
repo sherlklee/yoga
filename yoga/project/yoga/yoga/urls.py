@@ -21,5 +21,10 @@ urlpatterns = [
     path('login/', include('Login.urls')),
     path('register/', include('Register.urls')),
     path('customerinformation/', include('CustomerInformation.urls')),
-    path('', include('Index.urls'))
+    path('trainerinformation/', include('TrainerInformation.urls')),
+    path('memberlist/', include('Memberlist.urls')),
+    path('', include('Index.urls')),
+    path('course/', include('Course.urls')),
+    path('purchasecourse/', include('Purchasecourse.urls')),
+    path('classroom/', include('Classroom.urls')),
 ]

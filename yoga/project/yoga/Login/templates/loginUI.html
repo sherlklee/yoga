@@ -4,27 +4,54 @@
     <title>yoga登录</title>
 {% endblock %}
 
-{% block content %}
+{% block script%}
+    <script>
+        $(document).ready(function(){
+            $("#id_username").addClass("form-control");
+            $("#id_password").addClass("form-control");
+        });
+    </script>
+    <style type="text/css">
+        .bg{
+            margin-top: 120px;
+			height: 300px;
+        }
+
+    </style>
 
 {% endblock %}
 
-
-{% block content1 %}
-<div class="container">
-    <form method="post" action="" style="position:fixed;top:250px;right:300px;">
-        {%csrf_token%}
-        <fieldset style="border:true;">
-            <legend >Login:</legend>
-            {% for item in loginForm %}
-            <div class="input-group mb-6">
-               <font color="black">{{item}}</font>
-            </div>
-            {% endfor %}
-            {%if loginForm.non_field_errors%}
-                <div class="ErrorMessage">{{loginForm.non_field_errors}}</div>
-            {%endif%}
-            <button type="submit" class="btn btn-primary">登录</button>
-        </fieldset>
-    </form>
+{% block content %}
+<div class="container bg">
+    <div class="jumbotron">
+        <form method="post" action="" class="form-horizontal">
+            {%csrf_token%}
+            <fieldset style="border:true;">
+                <div class="row">
+                    <div class="col-sm-2 col-sm-offset-5">
+                        <legend >Login:</legend>
+                    </div>
+                </div>
+                {% for item in loginForm %}
+                 <div class="row">
+                    <div class="col-sm-1 col-sm-offset-4">
+                     {{item.label}}
+                    </div>
+                    <div class="col-sm-2">
+                        <font color="black">{{item}}</font>
+                    </div>
+                 </div>
+                {% endfor %}
+                {%if loginForm.non_field_errors%}
+                    <div class="ErrorMessage">{{loginForm.non_field_errors}}</div>
+                {%endif%}
+                 <div class="row">
+                    <div class="col-sm-2 col-sm-offset-5">
+                        <input class="btn btn-info" type="submit" value="Submit">
+                    </div>
+                 </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock %}

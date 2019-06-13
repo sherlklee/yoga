@@ -1,11 +1,15 @@
 from django.db import models
 
+SEX = (
+    (True, "女"),
+    (False, "男")
+)
 # Create your models here.
 #登录账号和id
 class Customer(models.Model):
     username = models.CharField(primary_key=True, max_length=20)
     password = models.CharField(max_length=20)
-    identity = models.CharField(default="customer",max_length=12)  #表示用户的身份 管理员为admin教练为trainer
+    identity = models.CharField(default="customer", max_length=12)  #表示用户的身份 管理员为admin教练为trainer
 
     def checkpassword(self , uncheckpassword):
         if self.password == uncheckpassword:
@@ -28,13 +32,20 @@ class Customer(models.Model):
         else:
             return False
 
+    def Iscustomer(self):
+        if self.identity == "customer":
+            return True
+        else:
+            return False
+
+#用户的个人信息
 class Customerinformation(models.Model):
     username = models.CharField(primary_key=True, max_length=20)
-    sex = models.BooleanField(default=True)#ture表示为女，false表示男
+    sex = models.BooleanField(default=True, choices=SEX)#ture表示为女，false表示男
     name = models.CharField(max_length=12)
     phone = models.CharField(max_length=11)
-    birthday = models.DateField(default='1990/01/01')
-    profession = models.CharField(max_length=20)
+    birthday = models.DateField(default='1990-01-01')
+    profession = models.CharField(max_length=20, default=" ")
     height = models.FloatField(default=0)
     weight = models.FloatField(default=0)
     bust = models.FloatField(default=0)
@@ -56,7 +67,7 @@ class Customerinformation(models.Model):
     def Getname(self):
         return self.name
 
-    def setage(self, p):
+    def Setage(self, p):
         self.age = p
         self.save()
 
@@ -91,7 +102,7 @@ class Customerinformation(models.Model):
     def Getheight(self):
         return self.height
 
-    def Detweight(self, p):
+    def Setweight(self, p):
         self.weight = p
         self.save()
 
@@ -126,14 +137,16 @@ class Customerinformation(models.Model):
     def Getshoulderwidth(self):
         return self.shoulderwidth
 
-class Trainerinformation(models.Model):
+#教练的个人简介
+class Trainer(models.Model):
     username = models.CharField(primary_key=True,max_length=20)
     name = models.CharField(max_length=20)
     age = models.IntegerField(default=0)
-    sex = models.BooleanField(default=True) #ture表示女 false表示男
+    sex = models.BooleanField(default=True,choices=SEX) #ture表示女 false表示男
     professionaltitle= models.CharField(max_length=30)
-    introdution = models.CharField(max_length=100)
-    photo = models.CharField(max_length=25)
+    introduction = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to="trainer/", max_length=30)
+    phone = models.CharField(max_length=11)
 
     def Setname(self, p):
         self.name = p
@@ -152,6 +165,12 @@ class Trainerinformation(models.Model):
     def Setsex(self, p):
         self.sex = p
         self.save()
+    def Setphone(self,p):
+        self.phone = p
+        self.save()
+
+    def Getphone(self):
+        return self.phone
 
     def Getsex(self):
         return self.sex
@@ -163,12 +182,12 @@ class Trainerinformation(models.Model):
     def Getprofessionaltitle(self):
         return self.professionaltitle
 
-    def Setintrodution(self, p):
-        self.intrudution = p
+    def Setintroduction(self, p):
+        self.introduction = p
         self.save()
 
-    def Getintrodution(self):
-        return self.intrudution
+    def Getintroduction(self):
+        return self.intruduction
 
     def Setphoto(self, p):
         self.photo = p
@@ -177,13 +196,25 @@ class Trainerinformation(models.Model):
     def Getphoto(self):
         return self.photo
 
+#课程
 class Course(models.Model):
     courseid = models.AutoField(primary_key=True)
-    coursename = models.CharField(max_length=20)
+    coursename = models.CharField(max_length=20, unique=True)
     trainer = models.CharField(max_length=20)
-    courseprice = models.FloatField(default=0)
+    courseprice = models.FloatField(default=0.0)
     coursevalid = models.BooleanField(default=True)#表示该课程是否有效
-    introdution = models.CharField(max_length=100)
+    introduction = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to="course/",max_length=30)
+
+    def Course(self, coursename, trainer, courseprice, introdution):
+        self.coursename = coursename
+        self.trainer = trainer
+        self.courseprice = courseprice
+        self.introdution = introdution
+        self.save()
+
+    def Getcourseid(self):
+        return self.courseid
 
     def Setcoursename(self,p):
         self.coursename = p
@@ -220,6 +251,165 @@ class Course(models.Model):
     def Getintrodution(self):
         return self.introdution
 
+#订单
+class BuyRecord(models.Model):
+    number = models.IntegerField(primary_key=True)
+    username = models.CharField(max_length=20)
+    coursename = models.CharField(max_length=20)
+    amount = models.IntegerField(default=0)      #表示课程的数量
+    time = models.DateTimeField(auto_now=True)
+    price = models.IntegerField(default=0)         #表示订单的总金额
+    pay_flag = models.BooleanField(default=False)  # 标记是否付钱的订单
+    valid = models.BooleanField(default=True)  # 标记是否为取消的订单
+
+    def Getnumber(self):
+        return self.number
+
+    def Setnumber(self, p):
+        self.number = p
+        self.save()
+
+    def Getusername(self):
+        return self.username
+
+    def Setusername(self, p):
+        self.username = p
+        self.save()
+
+    def Getcoursename(self):
+        return self.coursename
+
+    def Setcoursename(self, p):
+        self.coursename = p
+        self.save()
+
+    def Getamount(self):
+        return self.amount
+
+    def Setamount(self, p):
+        self.amount = p
+        self.save()
+
+    def Getprice(self):
+        return self.price
+
+    def Setprice(self, p):
+        self.price = p
+        self.save()
+
+    def Gettime(self):
+        return self.time
+
+    def Settime(self, p):
+        self.time = p
+        self.save()
+
+    def Getpayflag(self):
+        return self.pay_flag
+
+    def Setpayflag(self, p):
+        self.pay_flag = p
+        self.save()
+
+    def Getvalid(self):
+        return self.valid
+
+    def Setvalid(self, p):
+        self.valid = p
+        self.save()
+
+#教室
+class Classroom(models.Model):
+    classroomid = models.AutoField(primary_key=True)
+    classroomname = models.CharField(max_length=20,unique=True)
+    note = models.CharField(max_length=50)
+    maxpersonnumber = models.IntegerField(default=0)
+
+    def Setclassroomname(self,p):
+        self.classroomname = p
+        self.save()
+
+    def Getclassroomname(self):
+        return self.classroomname
+
+    def Setnote(self,p):
+        self.note = p
+        self.save()
+
+    def Getnote(self):
+        return self.note
+
+    def Setmaxpersonnumber(self,p):
+        self.maxpersonnumber = p
+        self.save()
+
+    def Getmaxpersonnumber(self):
+        return self.maxpersonnumber
+
+#教室的安排
+class Classroomorder(models.Model):
+    orderid = models.AutoField(primary_key=True)
+    classroomid = models.IntegerField(default=0)
+    username = models.CharField(max_length=20)  #教练的username
+    coursename = models.CharField(max_length=20)
+    date = models.DateField(default="2019-6-11")
+    dateclassnumber = models.IntegerField(default=0)   #表示一天中第几节课程
+    valid = models.BooleanField(default=True)  #预约教室是否有效
+
+    def Setclassroomid(self,p):
+        self.classroomid = p
+        self.save()
+
+    def Getclassroomid(self):
+        return self.classroomid
+
+    def Setusername(self,p):
+        self.username = p
+        self.save()
+
+    def Getusername(self):
+        return self.username
+
+    def Setdate(self,p):
+        self.date = p
+        self.save()
+
+    def Getdate(self):
+        return self.date
+
+    def Setvalid(self, p):
+        self.valid = p
+        self.save()
+
+    def Getvalid(self):
+        return self.valid
 
 
+#用户预约记录
+class Customercourseorder(models.Model):
+    orderid = models.AutoField(primary_key=True)
+    classid =models.IntegerField(default=0)
+    username = models.CharField(max_length=20)
+    valid = models.BooleanField(default=True) #表示预约是否有效
+    flag = models.BooleanField(default=False) #表示用户上完了课程
 
+    def Setclassid(self,p):
+        self.classid = p
+        self.save()
+
+    def Getclassid(self):
+        return self.classid
+
+    def Setvalid(self, p):
+        self.valid = p
+        self.save()
+
+    def Getvalid(self):
+        return self.valid
+
+    def Setflag(self, p):
+        self.flag = p
+        self.save()
+
+    def Getflag(self):
+        return self.flag

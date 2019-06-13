@@ -1,0 +1,68 @@
+{%extends 'adminbase.html' %}
+
+{% block title %}
+    <title>添加课程</title>
+{% endblock %}
+
+{% block script%}
+ <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_coursename").addClass("form-control");
+            $("#id_introduction").addClass("form-control");
+            $("#id_trainer").addClass("form-control");
+            $("#id_courseprice").addClass("form-control");
+        });
+        </script>
+        <style type="text/css">
+            .dumu-tab{
+                margin-top: 80px;
+            }
+
+        </style>
+
+
+{% endblock %}
+
+
+{% block content %}
+         <div class="container dumu-tab">
+            <div class="row row-offcanvas row-offcanvas-right">
+               <div class="col-xs-12 col-sm-9">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">添加课程</div>
+                    </div>
+
+                   <form class="form" method="post" action="">
+                       {%csrf_token%}
+                       {% for field in course %}
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">{{field.label}}</label>
+                            <div class="col-sm-10">
+                              {{ field }}
+                            </div>
+                          </div>
+                        {% endfor %}
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-info">添加</button>
+                        </div>
+                      </div>
+
+                    </form>
+
+                </div>
+
+                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                  <div class="list-group">
+                    <a href="/course/courselist/" class="list-group-item">在售课程</a>
+                    <a href="/course/discourse/" class="list-group-item">下架课程</a>
+                      <a href="/course/addcourse/" class="list-group-item active">添加课程</a>
+                  </div>
+                </div>
+           </div>
+    </div>
+{% endblock %}
+

@@ -1,113 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-{% block title %}<title>首页</title>{% endblock %}
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-	 {% load staticfiles %}
-<link href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet">
-<link href="{%static 'css/font-awesome.min.css'%}" rel="stylesheet">
-<link href="{%static 'css/animate.min.css'%}" rel="stylesheet">
-<link href="{%static 'css/prettyPhoto.css'%}" rel="stylesheet">
-<link href="{%static 'css/styles.css'%}" rel="stylesheet">
-	 {% load staticfiles %}
-<link rel="shortcut icon" href="{%static 'images/ico/favicon.ico'%}">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{% block content %}
-{% endblock %}
-</head>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body id="home">
-<header id="header">
-	<nav id="main-nav" class="navbar navbar-default navbar-fixed-top" role="banner">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				 {% load staticfiles %}
-				<a class="navbar-brand" href="/"><img src="{% static 'images/logo.png'%}" alt="logo"></a>
-			</div>
+    {% block title%}<title>主页</title>{% endblock %}
 
-			<div class="collapse navbar-collapse navbar-right">
-				<ul class="nav navbar-nav">
-					{% if userid == "trainer" %}
-					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
-					<li class="scroll"><a href="#our-team">学员</a></li>
-					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio" >你好~{{username}}</a></li>
-					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
-					{% elif userid == "admin" %}
-					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
-					<li class="scroll"><a href="#our-team">教练</a></li>
-					<li class="scroll"><a href="#about">教室</a></li>
-					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
-					{% elif userid == "customer" %}
-					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
-					<li class="scroll"><a href="#our-team">教练</a></li>
-					<li class="scroll"style="position:fixed;right:60px;"><a href="#portfolio">你好~{{username}}</a></li>
-					<li class="scroll"style="position:fixed;right:20px;"><a href="/login/logout/">退出</a></li>
-					{% else %}
-					<li class="scroll active"><a href="/">主页</a></li>
-					<li class="scroll"><a href="#services">yoga</a></li>
-					<li class="scroll"><a href="#about">课程</a></li>
-					<li class="scroll"><a href="#our-team">教练</a></li>
-					<li class="scroll"><a href="#portfolio">关于我们</a></li>
-					<li class="scroll" style="position:fixed;right:60px;"><a href="/login/">登录</a></li>
-					<li class="scroll"style="position:fixed;right:20px;"><a href="/register/">注册</a></li>
-					{%endif%}
-				</ul>
-			</div>
-		</div><!--/.container-->
-	</nav><!--/nav-->
-</header><!--/header-->
+	{% load staticfiles %}
+	 <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet">
 
 
-<section id="hero-banner">
-    <div class="banner-inner">
-		{% block content1 %}
-           <div class="container">
-               <div class="row">
-                   <div class="col-sm-12">
+    {% block script %}{% endblock %}
 
-                           <h2>Better than <b>EVER</b></h2>
-                           <p>Physical Mental and Spiritual practices <br/></p>
-                           <a class="btn btn-primary btn-lg" href="#">Get more</a>
+	<style type="text/css">
+		img{
+			width:100%;
+		}
+		.dumu-carousel{
+			margin-top: -20px;
+			height: 500px;
+			overflow: hidden;
+		}
+		.dumu-thumbnail img{
+			width : auto;
+		}
+		.dumu-three{
+			margin-top:50px;
+		}
+		.dumu-hr{
+			margin: 50px auto;
+		}
+		.dumu-hr > hr{
+			border:1px solid;
+		}
+		.dumu-foot{
+			margin-bottom:20px;
+		}
+	</style>
 
-                   </div>
-               </div>
-           </div>{% endblock %}
+  </head>
+  <body>
+    {% block nav %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">主页</a>
+            </div>
 
-       </div>
-</section><!--/#main-slider-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-navbar">
+
+              <ul class="nav navbar-nav">
+				<li id = "nav-course"><a href="#dumu-course">课程</a></li>
+
+				<li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">教练<span class="caret"></span></a>
+                  <ul class="dropdown-menu" id = "nav-trainer">
+                    <li><a href="#home">教练1</a></li>
+                    <li><a href="#profile">教练2</a></li>
+					<li><a href="#messages">教练3</a></li>
+					<li><a href="#settings">教练4</a></li>
+                  </ul>
+                </li>
+
+				<li id="nav-yoga"><a href="#">Yoga</a></li>
+
+				<li id="nav-ad"><a href="#">场地环境</a></li>
+
+				<li id="nav-us"><a href="#">关于我们</a></li>
+
+              </ul>
+				{% block searchform %}{% endblock %}
+				<!--<form class="navbar-form navbar-left" method="post" action="">-->
+                  <!--{%csrf_token%}-->
+                <!--<div class="form-group">-->
+                  <!--<input type="text" class="form-control" name="search" placeholder="Course">-->
+                <!--</div>-->
+                <!--<button type="submit" class="btn btn-default">Search</button>-->
+              <!--</form>-->
+
+              <ul class="nav navbar-nav navbar-right">
+				  {% block logout %}
+                <li><a href="/login/">登录</a></li>
+                <li><a href="/register/">注册</a></li>
+				  {% endblock %}
+              </ul>
+
+            </div>
+          </div>
+	</nav>
+    {% endblock %}
 
 
-<footer id="footer">
-	<div class="container">
-		<p>Contact-us: 1814059211@qq.com</p>
+	{% block content %}
+	{% load staticfiles %}
+	<div id="carousel-example-generic" class="carousel slide dumu-carousel" data-ride="carousel" data-interval="2000">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	  </ol>
+
+	  <!-- Wrapper for slides -->
+	  <div class="carousel-inner" role="listbox">
+		<div class="item active">
+		  <img src="{% static 'images/banner/banner.jpg'%}">
+		</div>
+		<div class="item">
+		  <img src="{% static 'images/banner/banner2.jpg'%}">
+		</div>
+		<div class="item">
+		  <img src="{% static 'images/banner/banner4.jpg'%}">
+		</div>
+	  </div>
+
+	  <!-- Controls -->
+	  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	  </a>
 	</div>
-</footer><!--/#footer-->
- {% load staticfiles %}
-<script src="{% static 'js/jquery.js'%}"></script>
-<script src="{% static 'js/bootstrap.min.js'%}"></script>
-<script src="{% static 'js/mousescroll.js'%}"></script>
-<script src="{% static 'js/smoothscroll.js'%}"></script>
-<script src="{% static 'js/jquery.prettyPhoto.js'%}"></script>
-<script src="{% static 'js/jquery.isotope.min.js'%}"></script>
-<script src="{% static 'js/jquery.inview.min.js'%}"></script>
-<script src="{% static 'js/wow.min.js'%}"></script>
-<script src="{% static 'js/custom-scripts.js'%}"></script>
-</body>
+
+	<div class="container dumu-three" id ="dumu-course">
+		<div class="row">
+			 <div class="col-sm-6 col-md-4">
+				<div class="thumbnail dumu-thumbnail text-center">
+				  <img src="{% static '/images/course/course1.jpg'%}">
+				  <div class="caption">
+					<h3>{{ item.coursename }}</h3>
+					<p>教练:{{item.trainer}}<br>
+                      {{ item.introduction }}</p>
+					<p><a href="#" class="btn btn-default" role="button">￥{{item.courseprice}}/节</a>
+					{% block button0 %}{% endblock %}
+						<!--<a href="#" class="btn btn-primary" role="button">购买</a></p>-->
+				  </div>
+				</div>
+			 </div>
+
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail dumu-thumbnail text-center">
+				  <img src="{% static '/images/course/course2.jpg'%}">
+				  <div class="caption">
+					<h3>{{ item1.coursename }}</h3>
+					<p>教练:{{item1.trainer}}<br>
+                      {{ item1.introduction }}</p>
+					<p><a href="#" class="btn btn-default" role="button">￥{{item1.courseprice}}/节</a>
+                     {% block button1 %}{% endblock %}
+
+				  </div>
+				</div>
+			 </div>
+
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail dumu-thumbnail text-center">
+				  <img src="{% static '/images/course/course3.jpg'%}">
+				  <div class="caption">
+					<h3>{{ item2.coursename }}</h3>
+					<p>教练:{{item2.trainer}}<br>
+                      {{ item2.introduction }}</p>
+					<p><a href="#" class="btn btn-default" role="button">￥{{item2.courseprice}}/节</a>
+                    {% block button2 %}{% endblock %}
+				  </div>
+				</div>
+			 </div>
+
+		</div>
+	</div>
+
+	<div class="container dumu-hr">
+			<hr/>
+	</div>
+
+	<div class="container" id ="dumu-tab">
+		<ul class="nav nav-tabs" role="tablist" id="tab-list">
+			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">教练-1</a></li>
+			<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">教练-2</a></li>
+			<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">教练-3</a></li>
+			<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">教练-4</a></li>
+		 </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="home">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-7">
+							<h2><mark>{{trainer0.name}}</mark> <small>教练</small></h2>
+							<p>
+								<br>
+							<h2>简介：</h2><p class="text-uppercase"><h3>{{trainer0.introduction}}</h3></p>
+								<br/>
+								<br>
+								<h4>联系方式：{{trainer0.phone}}</h4>
+							</p>
+						</div>
+						<div class="col-sm-5">
+							<img src="{%static '/images/trainer/01.jpg'%}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="profile">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-sm-5">
+							<img src="{%static '/images/trainer/02.jpg'%}">
+						</div>
+						<div class="col-sm-7">
+							<h2><mark>{{trainer1.name}}</mark> <small>教练</small></h2>
+							<p>
+								<br>
+							<h2>简介：</h2><p class="text-uppercase"><h3>{{trainer1.introduction}}</h3></p>
+								<br/>
+								<br>
+								<h4>联系方式：{{trainer1.phone}}</h4>
+
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="messages">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-7">
+							<h2><mark>{{trainer3.name}}</mark> <small>教练</small></h2>
+							<p>
+								<br>
+							<h2>简介：</h2><p class="text-uppercase"><h3>{{trainer3.introduction}}</h3></p>
+								<br/>
+								<br>
+								<h4>联系方式：{{trainer3.phone}}</h4>
+
+							</p>
+						</div>
+						<div class="col-sm-5">
+							<img src="{%static '/images/trainer/03.jpg'%}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="settings">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-5">
+							<img src="{%static '/images/trainer/04.jpg'%}">
+						</div>
+						<div class="col-sm-7">
+							<h2><mark>{{trainer2.name}}</mark> <small>教练</small></h2>
+							<p>
+
+								<br>
+							<h2>简介：</h2><p class="text-uppercase"><h3>{{trainer2.introduction}}</h3></p>
+								<br/>
+								<br>
+								<h4>联系方式：{{trainer2.phone}}</h4>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		  </div>
+	</div>
+
+	<div class="container dumu-hr">
+			<hr/>
+	</div>
+
+	<div class="container" id ="dumu-yoga">
+		<div class="jumbotron">
+		  <h1>瑜伽(Yoga)</h1>
+		  <p>瑜伽起源于印度，距今有五千多年的历史文化被人们称为“世界的瑰宝”。瑜伽发源印度北部的喜马拉雅山麓地带，
+			  古印度瑜伽修行者在大自然中修炼身心时，无意中发现各种动物与植物天生具有治疗、放松、睡眠、或保持清醒的
+			  方法，患病时能不经任何治疗而自然痊愈。</p>
+		  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+		</div>
+	</div>
+
+	<div class="container dumu-hr">
+			<hr/>
+	</div>
+	<div class="container" id="dumu-ad">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3>场地</h3>
+			</div>
+		</div>
+		<div class="jumbotron">
+		  	<div class="row">
+				<div class="col-sm-4">
+					<img src="{% static '/images/place/place0.jpg'%}"  class="img-rounded">
+				</div>
+				<div class="col-sm-4">
+					<img src="{% static '/images/place/place2.jpg'%}"  class="img-circle">
+				</div>
+				<div class="col-sm-4">
+					<img src="{% static '/images/place/place3.jpg'%}"class="img-thumbnail">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container dumu-hr">
+			<hr/>
+	</div>
+
+	<div class="container dumu-foot" id="dumu-us">
+		<footer id="footer">
+				<p class="text-center">Contact-us: 1814059211@qq.com</p>
+		</footer><!--/#footer-->
+  	</div>
+
+	{% endblock %}
+
+	<script src="{%static '/js/jquery.js'%}" ></script>
+  	<script src="{%static '/js/bootstrap.min.js'%}" ></script>
+
+  </body>
+<script type="text/javascript">
+		$(function(){
+			$("#nav-trainer>li>a").click(function(e){
+				var href = $(this).attr("href");
+				$("#tab-list>li>a[href= "+(href)+"]").tab('show');
+				$(document).scrollTop($("#dumu-tab").offset().top-80);
+				e.preventDefault();
+           });
+           $("#nav-course >a").click(function(e){
+           		$(document).scrollTop($("#dumu-course").offset().top-150);
+           		e.preventDefault();
+           	});
+          $("#nav-us >a").click(function(e){
+           		$(document).scrollTop($("#dumu-us").offset().top-150);
+           		e.preventDefault();
+           	});
+           	$("#nav-yoga >a").click(function(e){
+           		$(document).scrollTop($("#dumu-yoga").offset().top-150);
+           		e.preventDefault();
+           	});
+           	$("#nav-ad >a").click(function(e){
+           		$(document).scrollTop($("#dumu-ad").offset().top-150);
+           		e.preventDefault();
+           	});
+		});
+</script>
 </html>

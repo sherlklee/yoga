@@ -1,0 +1,58 @@
+{%extends 'base.html' %}
+
+{% block title %}
+    <title>主页</title>
+{% endblock %}
+
+{% block script%}
+
+{% endblock %}
+
+{% block nav %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">主页</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">课程<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/course/trainercourse/">我的课程</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="">课程安排</a></li>
+                  </ul>
+                </li>
+
+				<li><a href="/memberlist/customer/">我的会员</a></li>
+
+
+              </ul>
+				{% block search %}{% endblock %}
+				<!--<form class="navbar-form navbar-left" method="post" action="">-->
+                  <!--{%csrf_token%}-->
+                <!--<div class="form-group">-->
+                  <!--<input type="text" class="form-control" name="search" placeholder="Course">-->
+                <!--</div>-->
+                <!--<button type="submit" class="btn btn-default">Search</button>-->
+              <!--</form>-->
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/trainerinformation/">你好~{{username}}</a></li>
+                <li><a href="/login/logout/">退出</a></li>
+              </ul>
+
+            </div>
+          </div>
+	</nav>
+{% endblock %}

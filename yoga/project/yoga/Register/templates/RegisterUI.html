@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
+
 {% block title %}
     <title>注册</title>
 {% endblock %}
 
-{% block content %}
-<script>
+{% block script %}
+<script type="text/javascript">
 $().ready(function() {
-// 在键盘按下并释放及提交后验证提交表单
   $("#signupForm").validate({
 	    rules: {
 	      username: {
@@ -46,25 +46,46 @@ $().ready(function() {
 	color:red;
 }
 </style>
+<style type="text/css">
+        .bg{
+            margin-top: 120px;
+			height: 300px;
+        }
+</style>
+
 {% endblock %}
 
-
-{% block content1 %}
-<div class="container">
-    <form  id="signupForm" method="post" action=""  style="position:fixed;top:250px;right:300px;">
-    {%csrf_token%}
-        <fieldset style="border:true;">
-             <legend >Join us:</legend>
-            {% for field in registerForm %}
-            <div class="fieldWrapper" >
-                <font color="black"> {{ field.label_tag }} {{ field }}</font>
-            </div>
-            {% endfor %}
-            {%if registerForm.non_field_errors%}
-            {{registerForm.non_field_errors}}
-            {%endif%}
-            <button type="submit" class="btn btn-primary">注册</button>
-        </fieldset>
-    </form>
+{% block content %}
+<div class="container bg">
+    <div class="jumbotron">
+        <form method="post" action="" class="form-horizontal">
+            {%csrf_token%}
+            <fieldset style="border:true;">
+                <div class="row">
+                    <div class="col-sm-2 col-sm-offset-5">
+                        <legend >Join us:</legend>
+                    </div>
+                </div>
+                {% for item in registerForm %}
+                 <div class="row">
+                    <div class="col-sm-1 col-sm-offset-4">
+                     {{item.label}}
+                    </div>
+                    <div class="col-sm-2">
+                        <font color="black">{{item}}</font>
+                    </div>
+                 </div>
+                {% endfor %}
+                {%if loginForm.non_field_errors%}
+                    <div class="ErrorMessage">{{loginForm.non_field_errors}}</div>
+                {%endif%}
+                 <div class="row">
+                    <div class="col-sm-2 col-sm-offset-5">
+                        <input class="btn btn-info" type="submit" value="注册">
+                    </div>
+                 </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock %}
